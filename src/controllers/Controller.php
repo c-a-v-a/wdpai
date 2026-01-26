@@ -2,8 +2,8 @@
 
 class Controller {
   protected function render(string $template = "", array $variables =[]) {
-    $templatePath = 'public/views/' . $template . '.php.html';
-    $templatePath404 = 'public/views/dashboard.html';
+    $templatePath = 'public/views/' . $template . '.html';
+    $templatePath404 = 'public/views/404.html';
     $output = "";
 
     if (file_exists($templatePath)) {

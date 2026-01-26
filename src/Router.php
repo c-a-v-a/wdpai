@@ -1,13 +1,28 @@
 <?php
 
+require_once 'controllers/AdminPanelController.php';
+require_once 'controllers/CalendarController.php';
 require_once 'controllers/DashboardController.php';
+require_once 'controllers/MessageBoardController.php';
 require_once 'controllers/SecurityController.php';
 
 class Router {
   public static $routes = [
+    "admin" => [
+      "action" => "index",
+      "controller" => "AdminPanelController",
+    ],
+    "calendar" => [
+      "action" => "index",
+      "controller" => "CalendarController",
+    ],
     "dashboard" => [
       "action" => "index",
       "controller" => "DashboardController",
+    ],
+    "messageboard" => [
+      "action" => "index",
+      "controller" => "MessageBoardController",
     ],
     "login" => [
       "action" => "login",
