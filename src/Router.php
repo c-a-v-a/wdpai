@@ -5,6 +5,7 @@ require_once 'controllers/CalendarController.php';
 require_once 'controllers/DashboardController.php';
 require_once 'controllers/MessageBoardController.php';
 require_once 'controllers/SecurityController.php';
+require_once 'middleware/checkRequestAllowed.php';
 
 class Router {
   public static $routes = [
@@ -34,9 +35,15 @@ class Router {
     if (array_key_exists($path, Router::$routes)) {
       $controller = Router::$routes[$path]["controller"];
       $action = Router::$routes[$path]["action"];
-
       $controllerObj = $controller::getInstance();
-      $controllerObj->$action();
+
+      try {
+        checkRequestAllowed($controllerObj, $action);
+
+        $controllerObj->$action();
+      } catch(Exception $e) {
+        echo "ERROR: " . $e->getMessage();
+      }
     } else {
       include "public/views/404.html";
     }
