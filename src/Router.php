@@ -47,7 +47,7 @@ class Router {
         echo "ERROR: " . $e->getMessage();
       }
 
-      $mr = new EventRepository();
+      $mr = EventRepository::getInstance();
       var_dump($mr->getEvents());
 
     } else {
