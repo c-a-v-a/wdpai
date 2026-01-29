@@ -6,6 +6,8 @@ require_once 'controllers/DashboardController.php';
 require_once 'controllers/MessageBoardController.php';
 require_once 'controllers/SecurityController.php';
 require_once 'middleware/checkRequestAllowed.php';
+require_once 'repositories/UserRepository.php';
+require_once 'data/UserCreateDTO.php';
 
 class Router {
   public static $routes = [
@@ -44,6 +46,9 @@ class Router {
       } catch(Exception $e) {
         echo "ERROR: " . $e->getMessage();
       }
+
+      var_dump($ur->getUsers($u));
+
     } else {
       include "public/views/404.html";
     }
