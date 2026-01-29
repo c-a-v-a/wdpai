@@ -6,7 +6,7 @@ require_once 'controllers/DashboardController.php';
 require_once 'controllers/MessageBoardController.php';
 require_once 'controllers/SecurityController.php';
 require_once 'middleware/checkRequestAllowed.php';
-require_once 'repositories/MessageRepository.php';
+require_once 'repositories/EventRepository.php';
 require_once 'data/MessageCreateDTO.php';
 
 class Router {
@@ -47,8 +47,8 @@ class Router {
         echo "ERROR: " . $e->getMessage();
       }
 
-      $mr = new MessageRepository();
-      var_dump($mr->getMessages());
+      $mr = new EventRepository();
+      var_dump($mr->getEvents());
 
     } else {
       include "public/views/404.html";
