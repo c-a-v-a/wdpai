@@ -6,8 +6,8 @@ require_once 'controllers/DashboardController.php';
 require_once 'controllers/MessageBoardController.php';
 require_once 'controllers/SecurityController.php';
 require_once 'middleware/checkRequestAllowed.php';
-require_once 'repositories/UserRepository.php';
-require_once 'data/UserCreateDTO.php';
+require_once 'repositories/MessageRepository.php';
+require_once 'data/MessageCreateDTO.php';
 
 class Router {
   public static $routes = [
@@ -47,7 +47,8 @@ class Router {
         echo "ERROR: " . $e->getMessage();
       }
 
-      var_dump($ur->getUsers($u));
+      $mr = new MessageRepository();
+      var_dump($mr->getMessages());
 
     } else {
       include "public/views/404.html";
