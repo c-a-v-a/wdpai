@@ -1,16 +1,16 @@
 <?php
 
-require_once __DIR__.'/../../data/EventCreateDTO.php';
-require_once __DIR__.'/../../repositories/EventRepository.php';
+require_once __DIR__.'/../../data/MessageCreateDTO.php';
+require_once __DIR__.'/../../repositories/MessageRepository.php';
 
-class EventApiController {
-  private static ?EventApiController $instance = null;
+class MessageApiController {
+  private static ?MessageApiController $instance = null;
 
   private function __construct() {}
 
   public static function getInstance() {
     if (self::$instance == null) {
-      self::$instance = new EventApiController();
+      self::$instance = new MessageApiController();
     }
 
     return self::$instance;
@@ -19,13 +19,13 @@ class EventApiController {
   #[AllowedMethods(['GET', 'POST'])]
   public function index() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $this->addEvent();
+      $this->addMessage();
     } else {
-      $this->getEvents();
+      $this->getMessages();
     }
   }
 
-  private function addEvent() {
+  private function addMessage() {
     $rawBody = file_get_contents('php://input');
     
     if ($rawBody === false) {
@@ -39,19 +39,18 @@ class EventApiController {
       throw new RuntimeException('Invalid JSON format');
     }
 
-    foreach (['created_by', 'title', 'description', 'event_date'] as $field) {
+    foreach (['user_id', 'title', 'content'] as $field) {
       if (!isset($data[$field])) {
         http_response_code(400);
         throw new RuntimeException("Missing field $field");
       }
     }
 
-    $dto = new EventCreateDTO();
-    $dto->created_by = (int)$data['created_by'];
+    $dto = new MessageCreateDTO();
+    $dto->user_id = (int)$data['user_id'];
     $dto->title = (int)$data['title'];
-    $dto->description = (string)$data['description'];
-    $dto->event_date = (string)$data['event_date'];
-    $id = EventRepository::getInstance()->addEvent($dto);
+    $dto->content = (string)$data['content'];
+    $id = MessageRepository::getInstance()->addMessage($dto);
 
     header('Content-Type: application/json');
     echo json_encode(['success' => true, 'id' => $id]);
@@ -59,8 +58,8 @@ class EventApiController {
     return;
   }
 
-  private function getEvents() {
-    $events = EventRepository::getInstance()->getEvents();
+  private function getMessages() {
+    $events = MessageRepository::getInstance()->getMessages();
 
     header('Content-Type: application/json');
     echo json_encode($events);

@@ -2,7 +2,7 @@
 
 require_once 'Comment.php';
 
-class Message {
+class Message implements JsonSerializable {
   public int $id;
   public string $title;
   public string $content;
@@ -32,5 +32,17 @@ class Message {
     }
 
     return $msg;
+  }
+
+  public function jsonSerialize(): array {
+    return [
+      'id' => $this->id,
+      'title' => $this->title,
+      'content' => $this->content,
+      'created_at' => $this->created_at,
+      'author_first_name' => $this->author_first_name,
+      'author_surname' => $this->author_surname,
+      'comments' => $this->comments,
+    ];
   }
 }
