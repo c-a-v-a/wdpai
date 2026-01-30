@@ -5,9 +5,9 @@ require_once 'controllers/CalendarController.php';
 require_once 'controllers/DashboardController.php';
 require_once 'controllers/MessageBoardController.php';
 require_once 'controllers/SecurityController.php';
+require_once 'controllers/api/CommentApiController.php';
+require_once 'controllers/api/EventApiController.php';
 require_once 'middleware/checkRequestAllowed.php';
-require_once 'repositories/EventRepository.php';
-require_once 'data/MessageCreateDTO.php';
 
 class Router {
   public static $routes = [
@@ -31,6 +31,14 @@ class Router {
       "action" => "login",
       "controller" => "SecurityController",
     ],
+    "api/comment" => [
+      "action" => "addComment",
+      "controller" => "CommentApiController"
+    ],
+    "api/event" => [
+      "action" => "index",
+      "controller" => "EventApiController"
+    ]
   ];
 
   public static function run(string $path, string $query) {
@@ -42,21 +50,17 @@ class Router {
       try {
         checkRequestAllowed($controllerObj, $action);
 
-        $controllerObj->$action();
+        $controllerObj->$action(Router::parse($query));
       } catch(Exception $e) {
         echo "ERROR: " . $e->getMessage();
       }
-
-      $mr = EventRepository::getInstance();
-      var_dump($mr->getEvents());
-
     } else {
       include "public/views/404.html";
     }
   }
 
-  public static function parse(string $path) {
-    preg_match_all('/([^&=]+)=([^&]*)/', $path, $matches);
+  public static function parse(string $query) {
+    preg_match_all('/([^&=]+)=([^&]*)/', $query, $matches);
 
     $params = array_combine($matches[1], $matches[2]);
 

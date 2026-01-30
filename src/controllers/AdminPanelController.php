@@ -15,6 +15,7 @@ class AdminPanelController extends Controller {
     return self::$instance;
   }
 
+  #[AllowedMethods(['GET'])]
   public function index() {
     return $this->render("admin");
   }

@@ -2,7 +2,7 @@
 
 require_once 'UserEventDTO.php';
 
-class Event {
+class Event implements JsonSerializable {
   public int $id;
   public string $title;
   public string $description;
@@ -10,6 +10,18 @@ class Event {
   public string $creator_first_name;
   public string $creator_surname;
   public array $users = [];
+
+  public function jsonSerialize(): array {
+    return [
+      'id' => $this->id,
+      'title' => $this->title,
+      'description' => $this->description,
+      'event_date' => $this->event_date,
+      'creator_first_name' => $this->creator_first_name,
+      'creator_surname' => $this->creator_surname,
+      'users' => $this->users,
+    ];
+  }
 
   public static function fromDbRow(array $row): self {
     $event = new self();

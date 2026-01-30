@@ -6,7 +6,7 @@ require_once __DIR__.'/../data/CommentCreateDTO.php';
 class CommentRepository extends Repository {
   public function addComment(CommentCreateDTO $comment) {
     $conn = $this->database->getConnection();
-    $sql = "INSERT INTO comment (user_id, message_id, content)
+    $sql = "INSERT INTO comments (user_id, message_id, content)
             VALUES (:user_id, :message_id, :content)
             RETURNING id";
     $stmt = $conn->prepare($sql);

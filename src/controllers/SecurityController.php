@@ -15,6 +15,7 @@ class SecurityController extends Controller {
     return self::$instance;
   }
 
+  #[AllowedMethods(['GET'])]
   public function login() {
     return $this->render("login");
   }
