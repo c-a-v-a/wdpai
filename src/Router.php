@@ -8,6 +8,7 @@ require_once 'controllers/SecurityController.php';
 require_once 'controllers/api/CommentApiController.php';
 require_once 'controllers/api/EventApiController.php';
 require_once 'controllers/api/MessageApiController.php';
+require_once 'controllers/api/UserApiController.php';
 require_once 'middleware/checkRequestAllowed.php';
 
 class Router {
@@ -43,6 +44,18 @@ class Router {
     "api/message" => [
       "action" => "index",
       "controller" => "MessageApiController"
+    ],
+    "api/user" => [
+      "action" => "index",
+      "controller" => "UserApiController"
+    ],
+    "api/user/enable" => [
+      "action" => "enableUser",
+      "controller" => "UserApiController"
+    ],
+    "api/user/disable" => [
+      "action" => "disableUser",
+      "controller" => "UserApiController"
     ]
   ];
 

@@ -48,7 +48,7 @@ class MessageApiController {
 
     $dto = new MessageCreateDTO();
     $dto->user_id = (int)$data['user_id'];
-    $dto->title = (int)$data['title'];
+    $dto->title = (string)$data['title'];
     $dto->content = (string)$data['content'];
     $id = MessageRepository::getInstance()->addMessage($dto);
 
@@ -59,10 +59,10 @@ class MessageApiController {
   }
 
   private function getMessages() {
-    $events = MessageRepository::getInstance()->getMessages();
+    $messages = MessageRepository::getInstance()->getMessages();
 
     header('Content-Type: application/json');
-    echo json_encode($events);
+    echo json_encode($messages);
     
     return;
   }

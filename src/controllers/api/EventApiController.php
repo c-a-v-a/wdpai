@@ -48,7 +48,7 @@ class EventApiController {
 
     $dto = new EventCreateDTO();
     $dto->created_by = (int)$data['created_by'];
-    $dto->title = (int)$data['title'];
+    $dto->title = (string)$data['title'];
     $dto->description = (string)$data['description'];
     $dto->event_date = (string)$data['event_date'];
     $id = EventRepository::getInstance()->addEvent($dto);
