@@ -4,11 +4,43 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="public/styles/shared.css">
+  <link rel="stylesheet" href="public/styles/login.css">
   <title>Login</title>
 </head>
 
 <body>
-  <h1>Login</h1>
+  <div class="bg-dark container">
+    <h1 class="text-primary">FamBoard</h1>
+
+    <form onsubmit="return false;">
+      <div class="form-item">
+        <label for="email" class="text-label">Email</label><br>
+        <input
+          class="input text-label"
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+        >
+      </div>
+
+      <div class="form-item">
+        <label for="password" class="text-label">Password</label><br>
+        <input
+          class="input text-label"
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          required
+        >
+      </div>
+
+      <button class="btn-primary form-item">Login</button>
+    </form>
+  </div>
 </body>
 
 </html>
