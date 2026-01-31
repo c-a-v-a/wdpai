@@ -38,4 +38,19 @@ class EventRepository extends Repository {
 
     return array_map(fn($row) => Event::fromDbRow($row), $rows);
   }
+
+  public function getTodayEvents(): array {
+    $conn = $this->database->getConnection();
+    $sql = "SELECT id, title, description, event_date, creator_first_name, creator_surname, users 
+            FROM events_with_users
+            WHERE event_date >= CURRENT_DATE
+            AND event_date < CURRENT_DATE + INTERVAL '1 day'";
+    $stmt = $conn->prepare($sql);
+    
+    $stmt->execute();
+
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return array_map(fn($row) => Event::fromDbRow($row), $rows);
+  }
 }

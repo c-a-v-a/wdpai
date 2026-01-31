@@ -25,7 +25,21 @@ class MessageRepository extends Repository {
     $conn = $this->database->getConnection();
     $sql = "SELECT id, title, content, created_at, author_first_name, author_surname, comments 
             FROM messages_with_author_and_comments
-            WHERE created_at >= NOW() - INTERVAL '2 days'";
+            WHERE created_at >= NOW() - INTERVAL '3 days'";
+    $stmt = $conn->prepare($sql);
+    
+    $stmt->execute();
+
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return array_map(fn($row) => Message::fromDbRow($row), $rows);
+  }
+
+  public function getNewMessages(): array {
+    $conn = $this->database->getConnection();
+    $sql = "SELECT id, title, content, created_at, author_first_name, author_surname, comments 
+            FROM messages_with_author_and_comments
+            WHERE created_at >= NOW() - INTERVAL '1 days'";
     $stmt = $conn->prepare($sql);
     
     $stmt->execute();
