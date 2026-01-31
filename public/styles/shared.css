@@ -1,11 +1,13 @@
 :root {
   --nord0: #2e3440;
+  --nord1: #3b4252;
   --nord2: #434c5e;
   --nord3: #4c566a;
   --nord4: #d8dee9;
   --nord6: #eceff4;
   --nord7: #8fbcbb;
   --nord8: #88c0d0;
+  --nord11: #bf616a;
 
   font-family: Arial, Helvetica, sans-serif;
   font-size: 18pt;
@@ -34,13 +36,18 @@ body {
   padding: 0;
 }
 
-h1 {
-  font-size: 48pt;
-  font-weight: bold;
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .bg-dark {
   background-color: var(--nord0);
+}
+
+.bg-panel {
+  background-color: var(--nord1);
 }
 
 .container {
@@ -66,9 +73,14 @@ h1 {
   border-radius: 10px;
   color: var(--nord6);
   padding: 10px 20px;
-  border-width: 2px;
-  border-style: solid;
-  border-color: var(--nord7);
+}
+
+.btn-danger {
+  font-weight: bold;
+  background-color: var(--nord11);
+  border-radius: 10px;
+  color: var(--nord6);
+  padding: 10px 20px;
 }
 
 .input {
@@ -87,4 +99,41 @@ h1 {
 .input::placeholder {
   color: var(--nord4);
   opacity: 0.5;
+}
+
+#sidebar {
+  padding: 0px 20px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 250px;
+  height: 100vh;
+}
+
+#main-content {
+  margin-left: 290px;
+}
+
+#mobile-header {
+  display: none;
+}
+
+#menu {
+  margin-right: 20px;
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    display: none;
+  }
+
+  #main-content {
+    margin-left: 0px;
+  }
+
+  #mobile-header {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
 }

@@ -4,13 +4,55 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hello world</title>
-  <link rel="stylesheet" href="public/styles/index.css">
+  <title>Admin panel</title>
+  <link rel="stylesheet" href="public/styles/shared.css">
+  <link rel="stylesheet" href="public/styles/admin.css">
   <script src="public/scripts/index.js" defer></script>
 </head>
 
 <body>
-  <h1>Admin Panel</h1>
-</body>
+  <div id="container">
+    <aside id="sidebar" class="bg-panel">
+      <div>
+        <h1 class="text-primary">FamBoard</h1>
+      </div>
+      <nav>
+        <ul>
+          <li class="text-label">Dashboard</li>
+          <li class="text-label">Message board</li>
+          <li class="text-label">Calendar</li>
+          <li class="text-primary">Admin panel</li>
+        </ul>
+      </nav>
+      <button id="log-out" class="btn-danger">Log out</button>
+    </aside>
+    
+    <main id="main-content" class="bg-dark">
+      <div id="mobile-header" class="mobile-header bg-panel">
+        <button id="menu">MM</button>
+        <h1 class="text-primary">FamBoard</h1>
+      </div>
 
+      <h1 class="text-primary">Admin page</h1>
+      
+      <section>
+        <h2 class="text-label">Users</h2>
+        
+        <div id="user-card-container">
+          <div class="bg-panel user-card">
+            <span class="text-label">User 1</span>
+            <button class="btn-danger">Delete</button>
+          </div>
+          <div class="bg-panel user-card">
+            <span class="text-label">User 2</span>
+            <button class="btn-danger">Delete</button>
+          </div>
+        </div>
+
+        <button id="add-user" class="btn-primary">Add user</button>
+      </section>
+    </main>
+  </div>
+</body>
+  
 </html>
