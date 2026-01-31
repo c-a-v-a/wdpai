@@ -4,13 +4,52 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hello world</title>
-  <link rel="stylesheet" href="public/styles/index.css">
-  <script src="public/scripts/index.js" defer></script>
+  <title>Calendar</title>
+  <link rel="stylesheet" href="public/styles/shared.css">
+  <link rel="stylesheet" href="public/styles/admin.css">
+  <script src="public/scripts/shared.js" defer></script>
 </head>
 
 <body>
-  <h1>Callendar</h1>
-</body>
+  <div id="container">
+    <aside id="sidebar" class="bg-panel">
+      <div>
+        <div id="close-menu">CC</div>
+        <h1 class="text-primary">FamBoard</h1>
+      </div>
+      <nav>
+        <ul>
+          <li class="text-label">
+            <a href="/dashboard">Dashboard</a>
+          </li>
+          <li class="text-label">
+            <a href="/messageboard">Message board</a>
+          </li>
+          <li class="text-primary">
+            <a href="/calendar">Calendar</a>
+          </li>
+          <li class="text-label">
+            <a href="/admin">Admin panel</a>
+          </li>
+        </ul>
+      </nav>
+      <button id="log-out" class="btn-danger">Log out</button>
+    </aside>
+    
+    <main id="main-content" class="bg-dark">
+      <div id="mobile-header" class="mobile-header bg-panel">
+        <div id="menu">MM</div>
+        <h1 class="text-primary">FamBoard</h1>
+      </div>
 
+      <h1 class="text-primary">Calendar</h1>
+      
+      <section>
+        <div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+  
 </html>

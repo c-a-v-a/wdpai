@@ -36,6 +36,11 @@ body {
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 ul {
   list-style: none;
   padding: 0;
@@ -102,7 +107,6 @@ ul {
 }
 
 #sidebar {
-  padding: 0px 20px;
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -122,9 +126,48 @@ ul {
   margin-right: 20px;
 }
 
+#container {
+  display: flex;
+  width: 100vw;
+  min-height: 100vh; 
+}
+
+main {
+  width: 100%;
+}
+
+main>*{
+  padding: 0px 20px;
+}
+
+li {
+  margin: 10px 0px;
+}
+
+#sidebar>div {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+#sidebar>* {
+  margin: 0px 20px;
+}
+
+#close-menu {
+  margin-right: 20px;
+}
+
+#log-out {
+  margin-top: auto;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   #sidebar {
     display: none;
+    width: 100vw;
   }
 
   #main-content {
