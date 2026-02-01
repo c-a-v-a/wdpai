@@ -1,18 +1,19 @@
-#add-user {
-  margin-top: 20px;
-}
-
 .user-card {
-  padding: 10px 25px;
-  border-radius: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  gap: var(--space-md);
+  padding: var(--space-sm) calc(var(--space-md) + var(--space-xs));
+  border-radius: var(--border-radius);
+  background-color: var(--color-bg-panel);
 }
 
-#user-card-container {
+.user-card-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-sm);
+}
+
+.user-card-list + .btn {
+  margin-top: var(--space-md);
 }

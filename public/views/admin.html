@@ -12,112 +12,73 @@
 </head>
 
 <body>
-  <div id="container">
-    <aside id="sidebar" class="bg-panel">
-      <div>
-        <div id="close-menu">CC</div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-close" id="close-menu">✕</span>
         <h1 class="text-primary">FamBoard</h1>
       </div>
-      <nav>
+      <nav class="sidebar-nav">
         <ul>
-          <li class="text-label">
-            <a href="/dashboard">Dashboard</a>
-          </li>
-          <li class="text-label">
-            <a href="/messageboard">Message board</a>
-          </li>
-          <li class="text-label">
-            <a href="/calendar">Calendar</a>
-          </li>
-          <li class="text-primary">
-            <a href="/admin">Admin panel</a>
-          </li>
+          <li><a href="/dashboard" class="text-muted">Dashboard</a></li>
+          <li><a href="/messageboard" class="text-muted">Message board</a></li>
+          <li><a href="/calendar" class="text-muted">Calendar</a></li>
+          <li><a href="/admin" class="text-primary">Admin panel</a></li>
         </ul>
       </nav>
-      <button id="log-out" class="btn-danger">Log out</button>
+      <div class="sidebar-footer">
+        <button class="btn btn-danger" id="log-out">Log out</button>
+      </div>
     </aside>
-    
-    <main id="main-content" class="bg-dark">
-      <div id="mobile-header" class="mobile-header bg-panel">
-        <div id="menu">MM</div>
+
+    <main class="main">
+      <div class="main-header">
+        <span class="main-header-menu" id="menu">☰</span>
         <h1 class="text-primary">FamBoard</h1>
       </div>
 
       <h1 class="text-primary">Admin page</h1>
-      
-      <section>
-        <h2 class="text-label">Users</h2>
-        
-        <div id="user-card-container">
-        </div>
 
-        <button id="add-user" class="btn-primary">Add user</button>
+      <section>
+        <h2 class="text-muted">Users</h2>
+        <div class="user-card-list" id="user-card-container"></div>
+        <button class="btn btn-primary" id="add-user">Add user</button>
       </section>
     </main>
   </div>
 
-  <div class="modal-overlay">
+  <div class="modal-overlay" id="modal-overlay">
     <div class="modal">
       <h2 class="text-primary">Add user</h2>
-      <form onsubmit="return false;">
-        <div class="form-item">
-          <label for="first-name-input" class="text-label">First name</label><br>
-          <input
-            class="input text-label"
-            type="text"
-            id="first-name-input"
-            name="first-name-input"
-            placeholder="First name"
-            required
-          >
+      <form class="form" onsubmit="return false;">
+        <div class="form-field">
+          <label for="first-name-input" class="text-muted">First name</label><br>
+          <input class="input" type="text" id="first-name-input" placeholder="First name" required>
         </div>
-        <div class="form-item">
-          <label for="surname-input" class="text-label">Surname</label><br>
-          <input
-            class="input text-label"
-            type="text"
-            id="surname-input"
-            name="surname-input"
-            placeholder="Surname"
-            required
-          >
+        <div class="form-field">
+          <label for="surname-input" class="text-muted">Surname</label><br>
+          <input class="input" type="text" id="surname-input" placeholder="Surname" required>
         </div>
-        <div class="form-item">
-          <label for="email-input" class="text-label">Email</label><br>
-          <input
-            class="input text-label"
-            type="email"
-            id="email-input"
-            name="email-input"
-            placeholder="Email"
-            required
-          >
+        <div class="form-field">
+          <label for="email-input" class="text-muted">Email</label><br>
+          <input class="input" type="email" id="email-input" placeholder="Email" required>
         </div>
-        <div class="form-item">
-          <label for="password-input" class="text-label">Password</label><br>
-          <input
-            class="input text-label"
-            type="password"
-            id="password-input"
-            name="password-input"
-            placeholder="Password"
-            required
-          >
+        <div class="form-field">
+          <label for="password-input" class="text-muted">Password</label><br>
+          <input class="input" type="password" id="password-input" placeholder="Password" required>
         </div>
-        <div class="form-item">
-          <button id="add-user-action" class="btn-primary">Add user</button>
-        </div>
+        <button class="btn btn-primary" id="add-user-action">Add user</button>
       </form>
-      <button id="cancel-action" class="btn-danger">Cancel</button>
+      <button class="btn btn-danger" id="cancel-action">Cancel</button>
     </div>
   </div>
 
   <template id="user-card-template">
-    <div class="bg-panel user-card">
-      <span class="text-label name"></span>
-      <button class="action"></button>
+    <div class="user-card">
+      <span class="text-muted user-card-name"></span>
+      <button class="btn user-card-action"></button>
     </div>
   </template>
 </body>
-  
+
 </html>

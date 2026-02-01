@@ -10,35 +10,21 @@
 </head>
 
 <body>
-  <div class="bg-dark container">
-    <h1 class="text-primary">FamBoard</h1>
+  <div class="login-page">
+    <h1 class="text-primary login-page-title">FamBoard</h1>
 
-    <form onsubmit="return false;">
-      <div class="form-item">
-        <label for="email" class="text-label">Email</label><br>
-        <input
-          class="input text-label"
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Enter your email"
-          required
-        >
+    <form class="form" onsubmit="return false;">
+      <div class="form-field">
+        <label for="email" class="text-muted">Email</label><br>
+        <input class="input" type="email" id="email" placeholder="Enter your email" required>
       </div>
 
-      <div class="form-item">
-        <label for="password" class="text-label">Password</label><br>
-        <input
-          class="input text-label"
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Enter your password"
-          required
-        >
+      <div class="form-field">
+        <label for="password" class="text-muted">Password</label><br>
+        <input class="input" type="password" id="password" placeholder="Enter your password" required>
       </div>
 
-      <button class="btn-primary form-item">Login</button>
+      <button class="btn btn-primary">Login</button>
     </form>
   </div>
 </body>

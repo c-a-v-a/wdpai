@@ -14,21 +14,21 @@ async function renderTemplates(users) {
   const container = document.getElementById('user-card-container');
 
   container.innerHTML = "";
-  
+
   for (const user of users) {
     const clone = template.content.cloneNode(true);
-    const nameSpan = clone.querySelector('.name');
-    const actionButton = clone.querySelector('.action');
+    const nameSpan = clone.querySelector('.user-card-name');
+    const actionButton = clone.querySelector('.user-card-action');
 
     nameSpan.textContent = `${user.first_name} ${user.surname} (${user.email})`;
 
     if (user.active) {
       actionButton.textContent = 'Disable';
-      actionButton.className += ' btn-danger';
+      actionButton.classList.add('btn-danger');
       actionButton.onclick = () => { disableUser(user.id) };
     } else {
       actionButton.textContent = 'Enable';
-      actionButton.className += ' btn-primary';
+      actionButton.classList.add('btn-primary');
       actionButton.onclick = () => { enableUser(user.id) };
     }
 
@@ -37,7 +37,7 @@ async function renderTemplates(users) {
 }
 
 async function enableUser(id) {
-  const res = await fetch(`/api/user/enable?id=${id}`, { method: 'PUT' }); 
+  const res = await fetch(`/api/user/enable?id=${id}`, { method: 'PUT' });
 
   if (!res.ok) {
     alert('Could not get data from server');
@@ -48,7 +48,7 @@ async function enableUser(id) {
 }
 
 async function disableUser(id) {
-  const res = await fetch(`/api/user/disable?id=${id}`, { method: 'PUT' }); 
+  const res = await fetch(`/api/user/disable?id=${id}`, { method: 'PUT' });
 
   if (!res.ok) {
     alert('Could not get data from server');
@@ -59,8 +59,8 @@ async function disableUser(id) {
 }
 
 async function addUser() {
-  const form = document.querySelector('.modal>form');
-  
+  const form = document.querySelector('.modal .form');
+
   if (!form.checkValidity()) {
     return;
   }
@@ -70,7 +70,7 @@ async function addUser() {
   const email = document.getElementById('email-input').value;
   const password = document.getElementById('password-input').value;
 
-  const res = await fetch('/api/user', { 
+  const res = await fetch('/api/user', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -83,7 +83,7 @@ async function addUser() {
     })
   });
 
-  document.getElementsByClassName('modal-overlay')[0].style.display = "none";
+  document.getElementById('modal-overlay').classList.remove('modal-overlay-visible');
 
   if (!res.ok) {
     alert("Could not add user");
@@ -100,9 +100,9 @@ onload();
 document.getElementById('add-user-action').onclick = addUser;
 
 document.getElementById('add-user').onclick = () => {
-  document.getElementsByClassName('modal-overlay')[0].style.display = "flex";
+  document.getElementById('modal-overlay').classList.add('modal-overlay-visible');
 }
 
 document.getElementById('cancel-action').onclick = () => {
-  document.getElementsByClassName('modal-overlay')[0].style.display = "none";
+  document.getElementById('modal-overlay').classList.remove('modal-overlay-visible');
 }

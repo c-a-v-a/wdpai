@@ -6,44 +6,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Message board</title>
   <link rel="stylesheet" href="public/styles/shared.css">
-  <link rel="stylesheet" href="public/styles/admin.css">
   <script src="public/scripts/shared.js" defer></script>
 </head>
 
 <body>
-  <div id="container">
-    <aside id="sidebar" class="bg-panel">
-      <div>
-        <div id="close-menu">CC</div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-close" id="close-menu">✕</span>
         <h1 class="text-primary">FamBoard</h1>
       </div>
-      <nav>
+      <nav class="sidebar-nav">
         <ul>
-          <li class="text-label">
-            <a href="/dashboard">Dashboard</a>
-          </li>
-          <li class="text-primary">
-            <a href="/messageboard">Message board</a>
-          </li>
-          <li class="text-label">
-            <a href="/calendar">Calendar</a>
-          </li>
-          <li class="text-label">
-            <a href="/admin">Admin panel</a>
-          </li>
+          <li><a href="/dashboard" class="text-muted">Dashboard</a></li>
+          <li><a href="/messageboard" class="text-primary">Message board</a></li>
+          <li><a href="/calendar" class="text-muted">Calendar</a></li>
+          <li><a href="/admin" class="text-muted">Admin panel</a></li>
         </ul>
       </nav>
-      <button id="log-out" class="btn-danger">Log out</button>
+      <div class="sidebar-footer">
+        <button class="btn btn-danger" id="log-out">Log out</button>
+      </div>
     </aside>
-    
-    <main id="main-content" class="bg-dark">
-      <div id="mobile-header" class="mobile-header bg-panel">
-        <div id="menu">MM</div>
+
+    <main class="main">
+      <div class="main-header">
+        <span class="main-header-menu" id="menu">☰</span>
         <h1 class="text-primary">FamBoard</h1>
       </div>
 
       <h1 class="text-primary">Message board</h1>
-      
+
       <section>
         <div>
         </div>
@@ -51,5 +44,5 @@
     </main>
   </div>
 </body>
-  
+
 </html>
