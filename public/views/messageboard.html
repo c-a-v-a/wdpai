@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Message board</title>
   <link rel="stylesheet" href="public/styles/shared.css">
+  <link rel="stylesheet" href="public/styles/messageboard.css">
   <script src="public/scripts/shared.js" defer></script>
+  <script src="public/scripts/messageboard.js" defer></script>
 </head>
 
 <body>
@@ -36,12 +38,49 @@
       </div>
 
       <h1 class="text-primary">Message board</h1>
+      <button class="btn btn-primary" id="add-message">Add message</button>
 
       <section>
-        <div>
+        <div id="messages-container">
         </div>
       </section>
     </main>
+
+    <template id="message-card-template">
+      <div class="message-card">
+        <h2 class="message-title text-primary"></h3>
+        <p class="message-author text-subtle"></p>
+        <p class="message-content text-muted"></p>
+        <hr>
+        <h2 class="text-primary">Comments</h4>
+        <!--Comments as new paragraphs-->
+        <div class="message-comments"></div>
+        <div class="add-comment-container">
+          <input class="input comment-input" name="add-comment-input" type="text" placeholder="Comment">
+          <br>
+          <button class="btn btn-primary">Add comment</button>
+        </div>
+      </div>
+    </template>
+
+    <div class="modal-overlay" id="modal-overlay">
+      <div class="modal">
+        <h2 class="text-primary">Add message</h2>
+        <form class="form" onsubmit="return false;">
+          <div class="form-field">
+            <label for="title-input" class="text-muted">Title</label><br>
+            <input class="input" type="text" id="title-input" placeholder="Title" required>
+          </div>
+          <div class="form-field">
+            <label for="content-input" class="text-muted">Content</label><br>
+            <textarea class="input" id="content-input" placeholder="Content">
+            </textarea>
+          </div>
+          <button class="btn btn-primary" id="add-message-action">Add message</button>
+        </form>
+        <button class="btn btn-danger" id="cancel-action">Cancel</button>
+      </div>
+    </div>
   </div>
 </body>
 

@@ -1,0 +1,43 @@
+#messages-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.message-card {
+  background-color: var(--color-bg-panel);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--border-radius);
+}
+
+.message-card>.text-primary {
+  margin-bottom: 0;
+}
+
+.message-card>.message-author {
+  margin: 0;
+}
+
+.message-comments>p {
+  color: var(--color-text);
+  margin: var(--space-xs) 0;
+}
+
+.add-comment-container {
+  margin-top: var(--space-sm);
+}
+
+.comment-input {
+  width: 100%;
+}
+
+.add-comment-container>button {
+  margin-top: var(--space-sm);
+}
+
+#content-input {
+  width: 100%;
+  min-height: 200px;
+  margin: 0;
+}

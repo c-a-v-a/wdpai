@@ -66,6 +66,11 @@ a {
   color: var(--color-text);
 }
 
+.text-subtle {
+  color: var(--color-text);
+  font-size: 10pt;
+}
+
 .btn {
   font-weight: bold;
   border-radius: var(--border-radius);
