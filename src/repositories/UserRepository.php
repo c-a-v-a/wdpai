@@ -5,7 +5,7 @@ require_once __DIR__.'/../data/User.php';
 require_once __DIR__.'/../data/UserCreateDTO.php';
 
 class UserRepository extends Repository {
-  public function createUser(UserCreateDTO $user): int {
+  public function addUser(UserCreateDTO $user): int {
     $conn = $this->database->getConnection();
     $sql = "INSERT INTO users (first_name, surname, email, password)
             VALUES (:first_name, :surname, :email, :password)
@@ -26,7 +26,7 @@ class UserRepository extends Repository {
 
   public function getUsers(): array {
     $conn = $this->database->getConnection();
-    $sql = "SELECT id, email, first_name, surname, active FROM users";
+    $sql = "SELECT id, email, first_name, surname, active FROM users ORDER BY id";
     $stmt = $conn->prepare($sql);
     
     $stmt->execute();

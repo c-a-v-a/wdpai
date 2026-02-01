@@ -5,7 +5,7 @@ require_once __DIR__.'/../data/Message.php';
 require_once __DIR__.'/../data/MessageCreateDTO.php';
 
 class MessageRepository extends Repository {
-  public function createMessage(MessageCreateDTO $message): int {
+  public function addMessage(MessageCreateDTO $message): int {
     $conn = $this->database->getConnection();
     $sql = "INSERT INTO messages (user_id, title, content)
             VALUES (:user_id, :title, :content)

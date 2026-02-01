@@ -5,7 +5,7 @@ require_once __DIR__.'/../data/Event.php';
 require_once __DIR__.'/../data/EventCreateDTO.php';
 
 class EventRepository extends Repository {
-  public function creteEvent(EventCreateDTO $event): int {
+  public function addEvent(EventCreateDTO $event): int {
     $conn = $this->database->getConnection();
     $sql = "INSERT INTO events (created_by, title, description, event_date)
             VALUES (:created_by, :title, :description, :event_date)

@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="public/styles/shared.css">
   <link rel="stylesheet" href="public/styles/admin.css">
   <script src="public/scripts/shared.js" defer></script>
+  <script src="public/scripts/admin.js" defer></script>
 </head>
 
 <body>
@@ -48,20 +49,75 @@
         <h2 class="text-label">Users</h2>
         
         <div id="user-card-container">
-          <div class="bg-panel user-card">
-            <span class="text-label">User 1</span>
-            <button class="btn-danger">Delete</button>
-          </div>
-          <div class="bg-panel user-card">
-            <span class="text-label">User 2</span>
-            <button class="btn-danger">Delete</button>
-          </div>
         </div>
 
         <button id="add-user" class="btn-primary">Add user</button>
       </section>
     </main>
   </div>
+
+  <div class="modal-overlay">
+    <div class="modal">
+      <h2 class="text-primary">Add user</h2>
+      <form onsubmit="return false;">
+        <div class="form-item">
+          <label for="first-name-input" class="text-label">First name</label><br>
+          <input
+            class="input text-label"
+            type="text"
+            id="first-name-input"
+            name="first-name-input"
+            placeholder="First name"
+            required
+          >
+        </div>
+        <div class="form-item">
+          <label for="surname-input" class="text-label">Surname</label><br>
+          <input
+            class="input text-label"
+            type="text"
+            id="surname-input"
+            name="surname-input"
+            placeholder="Surname"
+            required
+          >
+        </div>
+        <div class="form-item">
+          <label for="email-input" class="text-label">Email</label><br>
+          <input
+            class="input text-label"
+            type="email"
+            id="email-input"
+            name="email-input"
+            placeholder="Email"
+            required
+          >
+        </div>
+        <div class="form-item">
+          <label for="password-input" class="text-label">Password</label><br>
+          <input
+            class="input text-label"
+            type="password"
+            id="password-input"
+            name="password-input"
+            placeholder="Password"
+            required
+          >
+        </div>
+        <div class="form-item">
+          <button id="add-user-action" class="btn-primary">Add user</button>
+        </div>
+      </form>
+      <button id="cancel-action" class="btn-danger">Cancel</button>
+    </div>
+  </div>
+
+  <template id="user-card-template">
+    <div class="bg-panel user-card">
+      <span class="text-label name"></span>
+      <button class="action"></button>
+    </div>
+  </template>
 </body>
   
 </html>
