@@ -1,6 +1,18 @@
 <?php
 
 class Controller {
+  protected static ?self $instance = null;
+
+  private function __construct() {}
+
+  public static function getInstance(): static {
+    if (static::$instance === null) {
+      static::$instance = new static();
+    }
+
+    return static::$instance;
+  }
+
   protected function render(string $template = "", array $variables =[]) {
     $templatePath = 'public/views/' . $template . '.html';
     $templatePath404 = 'public/views/404.html';

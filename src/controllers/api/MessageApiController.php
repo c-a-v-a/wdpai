@@ -1,21 +1,10 @@
 <?php
 
+require_once 'ApiController.php';
 require_once __DIR__.'/../../data/MessageCreateDTO.php';
 require_once __DIR__.'/../../repositories/MessageRepository.php';
 
-class MessageApiController {
-  private static ?MessageApiController $instance = null;
-
-  private function __construct() {}
-
-  public static function getInstance() {
-    if (self::$instance == null) {
-      self::$instance = new MessageApiController();
-    }
-
-    return self::$instance;
-  }
-
+class MessageApiController extends ApiController {
   #[AllowedMethods(['GET', 'POST'])]
   public function index() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -26,18 +15,7 @@ class MessageApiController {
   }
 
   private function addMessage() {
-    $rawBody = file_get_contents('php://input');
-    
-    if ($rawBody === false) {
-      http_response_code(400);
-      throw new RuntimeException('Failed to read request body');
-    }
-
-    $data = json_decode($rawBody, true);
-    if ($data === null) {
-      http_response_code(400);
-      throw new RuntimeException('Invalid JSON format');
-    }
+    $data = $this->getJson();
 
     foreach (['user_id', 'title', 'content'] as $field) {
       if (!isset($data[$field])) {

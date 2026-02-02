@@ -1,35 +1,13 @@
 <?php
 
+require_once 'ApiController.php';
 require_once __DIR__.'/../../data/CommentCreateDTO.php';
 require_once __DIR__.'/../../repositories/CommentRepository.php';
 
-class CommentApiController {
-  private static ?CommentApiController $instance = null;
-
-  private function __construct() {}
-
-  public static function getInstance() {
-    if (self::$instance == null) {
-      self::$instance = new CommentApiController();
-    }
-
-    return self::$instance;
-  }
-
+class CommentApiController extends ApiController {
   #[AllowedMethods(['POST'])]
   public function addComment() {
-    $rawBody = file_get_contents('php://input');
-    
-    if ($rawBody === false) {
-      http_response_code(400);
-      throw new RuntimeException('Failed to read request body');
-    }
-
-    $data = json_decode($rawBody, true);
-    if ($data === null) {
-      http_response_code(400);
-      throw new RuntimeException('Invalid JSON format');
-    }
+    $data = $this->getJson();
 
     foreach (['user_id', 'message_id', 'content'] as $field) {
       if (!isset($data[$field])) {

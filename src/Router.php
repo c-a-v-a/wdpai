@@ -10,6 +10,7 @@ require_once 'controllers/api/EventApiController.php';
 require_once 'controllers/api/MessageApiController.php';
 require_once 'controllers/api/UserApiController.php';
 require_once 'middleware/checkRequestAllowed.php';
+require_once 'middleware/checkIsAuthorized.php';
 
 class Router {
   public static $routes = [
@@ -65,12 +66,13 @@ class Router {
       $action = Router::$routes[$path]["action"];
       $controllerObj = $controller::getInstance();
 
-      try {
-        checkRequestAllowed($controllerObj, $action);
-
+      
+      if (!checkRequestAllowed($controllerObj, $action)) {
+        http_response_code(405);
+      } else if (!checkIsAuthorized($controllerObj, $action)) {
+        http_response_code(401);
+      } else {
         $controllerObj->$action(Router::parse($query));
-      } catch(Exception $e) {
-        echo "ERROR: " . $e->getMessage();
       }
     } else {
       include "public/views/404.html";

@@ -44,7 +44,7 @@ class EventRepository extends Repository {
     $sql = "SELECT id, title, description, event_date, creator_first_name, creator_surname, users 
             FROM events_with_users
             WHERE event_date >= CURRENT_DATE
-            AND event_date < CURRENT_DATE + INTERVAL '1 day'";
+            AND event_date < CURRENT_DATE + INTERVAL '7 day'";
     $stmt = $conn->prepare($sql);
     
     $stmt->execute();

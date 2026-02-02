@@ -2,7 +2,7 @@
 
 require_once 'AllowedMethods.php';
 
-function checkRequestAllowed(object $controller, string $methodName) {
+function checkRequestAllowed(object $controller, string $methodName): bool {
   $reflection = new ReflectionMethod($controller, $methodName);
   $attributes = $reflection->getAttributes(AllowedMethods::class);
 
@@ -11,7 +11,9 @@ function checkRequestAllowed(object $controller, string $methodName) {
     $allowed = $instance->methods;
 
     if (!in_array($_SERVER['REQUEST_METHOD'], $allowed)) {
-      throw new Exception("Method not allowed");
+      return false;
     }
   }
+
+  return true;
 }

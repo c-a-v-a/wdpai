@@ -1,21 +1,10 @@
 <?php
 
+require_once 'ApiController.php';
 require_once __DIR__.'/../../data/EventCreateDTO.php';
 require_once __DIR__.'/../../repositories/EventRepository.php';
 
-class EventApiController {
-  private static ?EventApiController $instance = null;
-
-  private function __construct() {}
-
-  public static function getInstance() {
-    if (self::$instance == null) {
-      self::$instance = new EventApiController();
-    }
-
-    return self::$instance;
-  }
-
+class EventApiController extends ApiController {
   #[AllowedMethods(['GET', 'POST'])]
   public function index() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -26,18 +15,7 @@ class EventApiController {
   }
 
   private function addEvent() {
-    $rawBody = file_get_contents('php://input');
-    
-    if ($rawBody === false) {
-      http_response_code(400);
-      throw new RuntimeException('Failed to read request body');
-    }
-
-    $data = json_decode($rawBody, true);
-    if ($data === null) {
-      http_response_code(400);
-      throw new RuntimeException('Invalid JSON format');
-    }
+    $data = $this->getJson();
 
     foreach (['created_by', 'title', 'description', 'event_date'] as $field) {
       if (!isset($data[$field])) {

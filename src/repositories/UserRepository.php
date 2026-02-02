@@ -3,6 +3,7 @@
 require_once 'Repository.php';
 require_once __DIR__.'/../data/User.php';
 require_once __DIR__.'/../data/UserCreateDTO.php';
+require_once __DIR__.'/../data/UserLoginDTO.php';
 
 class UserRepository extends Repository {
   public function addUser(UserCreateDTO $user): int {
@@ -32,6 +33,16 @@ class UserRepository extends Repository {
     $stmt->execute();
 
     return $stmt->fetchAll(PDO::FETCH_CLASS, User::class);
+  }
+
+  public function getUser(string $email): array {
+    $conn = $this->database->getConnection();
+    $sql = "SELECT id, email, password FROM users WHERE email = :email";
+    $stmt = $conn->prepare($sql);
+    
+    $stmt->execute([ 'email' => $email ]);
+
+    return $stmt->fetch(PDO::FETCH_CLASS, UserLoginDTO::class);
   }
 
   public function enableUser(int $userId): bool {

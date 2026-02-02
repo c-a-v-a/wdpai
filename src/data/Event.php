@@ -12,6 +12,15 @@ class Event implements JsonSerializable {
   public array $users = [];
 
   public function jsonSerialize(): array {
+    $joined = false;
+
+    foreach ($this->users as $user) {
+      if ($user['id'] === $_SESSION['id']) {
+        $joined = true;
+        break;
+      }
+    }
+
     return [
       'id' => $this->id,
       'title' => $this->title,
@@ -20,6 +29,7 @@ class Event implements JsonSerializable {
       'creator_first_name' => $this->creator_first_name,
       'creator_surname' => $this->creator_surname,
       'users' => $this->users,
+      'joined' => $joined
     ];
   }
 

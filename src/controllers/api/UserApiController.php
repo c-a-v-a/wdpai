@@ -1,19 +1,55 @@
 <?php
 
+require_once 'ApiController.php';
 require_once __DIR__.'/../../data/UserCreateDTO.php';
 require_once __DIR__.'/../../repositories/UserRepository.php';
 
-class UserApiController {
-  private static ?UserApiController $instance = null;
+class UserApiController extends ApiController {
+  #[PublicRoute]
+  #[AllowedMethods(['POST'])]
+  public function login() {
+    $data = $this->getJson();
 
-  private function __construct() {}
-
-  public static function getInstance() {
-    if (self::$instance == null) {
-      self::$instance = new UserApiController();
+    foreach (['email', 'password'] as $field) {
+      if (!isset($data[$field])) {
+        http_response_code(400);
+        throw new RuntimeException("Missing field $field");
+      }
     }
 
-    return self::$instance;
+    $user = UserRepository::getInstance()->getUser($data['email']);
+
+    if ($user === false || !password_verify($data['password'], $user->password)) {
+      http_response_code(401);
+      throw new RuntimeException("Email or password incorrect.");
+    }
+
+    session_start();
+    $_SESSION['id'] = $user->id;
+    $_SESSION['email'] = $user->email;
+
+    header("Location: /dashboard", true, 303);
+    return;
+  }
+
+  #[AllowedMethods(['POST'])]
+  public function logout() {
+    session_destroy();
+
+    if (ini_get("session.use_cookies")) {
+      $params = session_get_cookie_params();
+      setcookie(
+          session_name(),
+          '',
+          time() - 42000,
+          $params['path'],
+          $params['domain'],
+          $params['secure'],
+          $params['httponly']
+      );
+    }
+
+    header("Location: /login", true, 303);
   }
 
   #[AllowedMethods(['GET', 'POST'])]
@@ -50,18 +86,7 @@ class UserApiController {
   }
 
   private function addUser() {
-    $rawBody = file_get_contents('php://input');
-    
-    if ($rawBody === false) {
-      http_response_code(400);
-      throw new RuntimeException('Failed to read request body');
-    }
-
-    $data = json_decode($rawBody, true);
-    if ($data === null) {
-      http_response_code(400);
-      throw new RuntimeException('Invalid JSON format');
-    }
+    $data = $this->getJson();
 
     foreach (['first_name', 'surname', 'email', 'password'] as $field) {
       if (!isset($data[$field])) {
