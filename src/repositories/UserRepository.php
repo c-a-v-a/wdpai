@@ -35,14 +35,15 @@ class UserRepository extends Repository {
     return $stmt->fetchAll(PDO::FETCH_CLASS, User::class);
   }
 
-  public function getUser(string $email): array {
+  public function getUser(string $email): object {
     $conn = $this->database->getConnection();
     $sql = "SELECT id, email, password FROM users WHERE email = :email";
     $stmt = $conn->prepare($sql);
     
     $stmt->execute([ 'email' => $email ]);
+    $stmt->setFetchMode(PDO::FETCH_CLASS, UserLoginDTO::class);
 
-    return $stmt->fetch(PDO::FETCH_CLASS, UserLoginDTO::class);
+    return $stmt->fetch();
   }
 
   public function enableUser(int $userId): bool {

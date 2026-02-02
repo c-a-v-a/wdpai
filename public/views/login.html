@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="public/styles/shared.css">
   <link rel="stylesheet" href="public/styles/login.css">
+  <script src="public/scripts/login.js" defer></script>
   <title>Login</title>
 </head>
 
@@ -13,7 +14,7 @@
   <div class="login-page">
     <h1 class="text-primary login-page-title">FamBoard</h1>
 
-    <form class="form" onsubmit="return false;">
+    <form id="login-form" class="form" onsubmit="return false;">
       <div class="form-field">
         <label for="email" class="text-muted">Email</label><br>
         <input class="input" type="email" id="email" placeholder="Enter your email" required>
@@ -24,7 +25,7 @@
         <input class="input" type="password" id="password" placeholder="Enter your password" required>
       </div>
 
-      <button class="btn btn-primary">Login</button>
+      <button id="login-action" class="btn btn-primary">Login</button>
     </form>
   </div>
 </body>

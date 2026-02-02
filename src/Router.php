@@ -57,6 +57,14 @@ class Router {
     "api/user/disable" => [
       "action" => "disableUser",
       "controller" => "UserApiController"
+    ],
+    "api/login" => [
+      "action" => "login",
+      "controller" => "UserApiController"
+    ],
+    "api/logout" => [
+      "action" => "logout",
+      "controller" => "UserApiController"
     ]
   ];
 

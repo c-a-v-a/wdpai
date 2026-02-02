@@ -24,12 +24,10 @@ class UserApiController extends ApiController {
       throw new RuntimeException("Email or password incorrect.");
     }
 
-    session_start();
     $_SESSION['id'] = $user->id;
     $_SESSION['email'] = $user->email;
 
-    header("Location: /dashboard", true, 303);
-    return;
+    echo json_encode(['success' => true]);
   }
 
   #[AllowedMethods(['POST'])]
@@ -49,7 +47,7 @@ class UserApiController extends ApiController {
       );
     }
 
-    header("Location: /login", true, 303);
+    echo json_encode(['success' => true]);
   }
 
   #[AllowedMethods(['GET', 'POST'])]

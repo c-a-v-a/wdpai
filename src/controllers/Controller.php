@@ -3,7 +3,9 @@
 class Controller {
   protected static ?self $instance = null;
 
-  private function __construct() {}
+  private function __construct() {
+    session_start();
+  }
 
   public static function getInstance(): static {
     if (static::$instance === null) {
