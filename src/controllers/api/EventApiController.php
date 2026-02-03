@@ -31,6 +31,16 @@ class EventApiController extends ApiController {
     echo json_encode(['success' => true]);
   }
 
+  #[AllowedMethods(['GET'])]
+  public function getThisWeekEvents() {
+    $events = EventRepository::getInstance()->getThisWeekEvents();
+
+    header('Content-Type: application/json');
+    echo json_encode($events);
+    
+    return;
+  }
+
   private function addEvent() {
     $data = $this->getJson();
 

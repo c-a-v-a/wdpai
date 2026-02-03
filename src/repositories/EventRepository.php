@@ -40,12 +40,12 @@ class EventRepository extends Repository {
     return array_map(fn($row) => Event::fromDbRow($row), $rows);
   }
 
-  public function getTodayEvents(): array {
+  public function getThisWeekEvents(): array {
     $conn = $this->database->getConnection();
     $sql = "SELECT id, title, description, event_date, creator_first_name, creator_surname, users 
             FROM events_with_users
-            WHERE event_date >= CURRENT_DATE
-            AND event_date < CURRENT_DATE + INTERVAL '7 day'";
+            WHERE event_date >= DATE_TRUNC('week', CURRENT_DATE)
+            AND event_date < DATE_TRUNC('week', CURRENT_DATE) + INTERVAL '7 day'";
     $stmt = $conn->prepare($sql);
     
     $stmt->execute();

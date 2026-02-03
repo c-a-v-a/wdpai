@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard</title>
   <link rel="stylesheet" href="public/styles/shared.css">
+  <link rel="stylesheet" href="public/styles/dashboard.css">
   <script src="public/scripts/shared.js" defer></script>
+  <script src="public/scripts/dashboard.js" defer></script>
 </head>
 
 <body>
@@ -37,12 +39,62 @@
 
       <h1 class="text-primary">Dashboard</h1>
 
-      <section>
-        <div>
-        </div>
+      <!-- Section 1: Weekly Calendar -->
+      <section class="dashboard-section">
+        <h2 class="text-primary">Current week</h2>
+        <div class="week-grid" id="week-grid"></div>
+        <div class="week-list" id="week-list"></div>
+      </section>
+
+      <!-- Section 2: This Week's Events -->
+      <section class="dashboard-section">
+        <h2 class="text-primary">This week's events</h2>
+        <div class="event-list" id="events-list"></div>
+      </section>
+
+      <!-- Section 3: Messages -->
+      <section class="dashboard-section">
+        <h2 class="text-primary">New messages</h2>
+        <div class="message-list" id="messages-list"></div>
       </section>
     </main>
   </div>
+
+  <!-- Weekly calendar templates -->
+  <template id="week-day-template">
+    <div class="week-day">
+      <span class="event-dot"></span>
+    </div>
+  </template>
+
+  <template id="week-list-item-template">
+    <div class="week-list-item">
+      <span class="week-list-day"></span>
+      <span class="week-list-name"></span>
+      <span class="event-dot"></span>
+    </div>
+  </template>
+
+  <!-- Event item template -->
+  <template id="event-item-template">
+    <div class="dashboard-card">
+      <div class="dashboard-card-info">
+        <span class="dashboard-card-title"></span>
+        <span class="dashboard-card-subtitle text-muted"></span>
+      </div>
+      <button class="btn btn-primary dashboard-card-action">Join</button>
+    </div>
+  </template>
+
+  <!-- Message item template -->
+  <template id="message-item-template">
+    <div class="dashboard-card">
+      <div class="dashboard-card-info">
+        <span class="dashboard-card-title"></span>
+        <span class="dashboard-card-subtitle text-muted"></span>
+      </div>
+    </div>
+  </template>
 </body>
 
 </html>

@@ -14,6 +14,16 @@ class MessageApiController extends ApiController {
     }
   }
 
+  #[AllowedMethods(['GET'])]
+  public function getNewMessages() {
+    $messages = MessageRepository::getInstance()->getNewMessages();
+
+    header('Content-Type: application/json');
+    echo json_encode($messages);
+    
+    return;
+  }
+
   private function addMessage() {
     $data = $this->getJson();
 

@@ -1,0 +1,203 @@
+.dashboard-section {
+  margin-top: var(--space-lg);
+  max-width: 900px;
+}
+
+/* Section 1: Weekly Calendar */
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.week-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+  padding: var(--space-sm);
+  background-color: var(--color-bg-panel);
+  border-radius: var(--border-radius);
+  font-size: 14pt;
+  color: var(--color-text);
+  cursor: default;
+}
+
+.week-day:hover {
+  background-color: var(--color-bg-input);
+}
+
+.week-day-today {
+  background-color: var(--color-primary);
+  color: var(--color-bg-dark);
+  font-weight: bold;
+}
+
+.week-day-today:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.week-day-weekend {
+  color: var(--color-border);
+}
+
+.week-day-today.week-day-weekend {
+  color: var(--color-bg-dark);
+}
+
+.week-day .event-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.week-day-label {
+  display: block;
+  text-align: center;
+  padding: var(--space-sm);
+  font-size: 10pt;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-border);
+}
+
+/* Week mobile list */
+.week-list {
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.week-list-item {
+  display: flex;
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-bg-panel);
+  border-radius: var(--border-radius);
+}
+
+.week-list-item:hover {
+  background-color: var(--color-bg-input);
+}
+
+.week-list-item-today {
+  background-color: var(--color-primary);
+}
+
+.week-list-item-today:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.week-list-day {
+  font-size: 18pt;
+  font-weight: bold;
+  width: 50px;
+  color: var(--color-text-light);
+}
+
+.week-list-item-today .week-list-day {
+  color: var(--color-bg-dark);
+}
+
+.week-list-name {
+  font-size: 12pt;
+  color: var(--color-text);
+  flex: 1;
+}
+
+.week-list-item-today .week-list-name {
+  color: var(--color-bg-dark);
+}
+
+.week-list-item-weekend .week-list-name {
+  color: var(--color-border);
+}
+
+.week-list-item-today.week-list-item-weekend .week-list-name {
+  color: var(--color-bg-dark);
+}
+
+.week-list-item .event-dot {
+  margin-left: auto;
+}
+
+/* Section 2 & 3: Shared card styles */
+.event-list,
+.message-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dashboard-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--color-bg-panel);
+  border-radius: var(--border-radius);
+}
+
+.dashboard-card:hover {
+  background-color: var(--color-bg-input);
+}
+
+.dashboard-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.dashboard-card-title {
+  font-size: 16pt;
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+.dashboard-card-subtitle {
+  font-size: 12pt;
+}
+
+.dashboard-card-action {
+  display: none;
+}
+
+.dashboard-card-action-visible {
+  display: block;
+}
+
+/* Shared dot styles (duplicated from calendar for independence) */
+.event-dot {
+  display: none;
+  height: 25%;
+  min-height: 20px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: #a3be8c;
+  flex-shrink: 0;
+}
+
+.event-dot-visible {
+  display: block;
+}
+
+.event-dot-unjoined {
+  background-color: var(--color-text);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .week-grid {
+    display: none;
+  }
+
+  .week-list {
+    display: flex;
+  }
+}
