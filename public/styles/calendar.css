@@ -47,6 +47,10 @@
   display: block;
 }
 
+.event-dot-unjoined {
+  background-color: var(--color-text);
+}
+
 .calendar-day .event-dot {
   position: absolute;
   top: 50%;

@@ -42,6 +42,10 @@ class Router {
       "action" => "index",
       "controller" => "EventApiController"
     ],
+    "api/event/join" => [
+      "action" => "joinEvent",
+      "controller" => "EventApiController"
+    ],
     "api/message" => [
       "action" => "index",
       "controller" => "MessageApiController"

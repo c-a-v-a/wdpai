@@ -2,6 +2,7 @@
 
 require_once 'ApiController.php';
 require_once __DIR__.'/../../data/EventCreateDTO.php';
+require_once __DIR__.'/../../data/EventJoinDTO.php';
 require_once __DIR__.'/../../repositories/EventRepository.php';
 
 class EventApiController extends ApiController {
@@ -12,6 +13,22 @@ class EventApiController extends ApiController {
     } else {
       $this->getEvents();
     }
+  }
+
+  #[AllowedMethods(['POST'])]
+  public function joinEvent(array $params) {
+    if (!array_key_exists('event_id', $params)) {
+      http_response_code(400);
+      throw new RuntimeException('Invalid query params');
+    }
+
+    $dto = new EventJoinDTO();
+    $dto->event_id = $params['event_id'];
+    $dto->user_id = $_SESSION['id'];
+
+    EventRepository::getInstance()->joinEvent($dto);
+
+    echo json_encode(['success' => true]);
   }
 
   private function addEvent() {

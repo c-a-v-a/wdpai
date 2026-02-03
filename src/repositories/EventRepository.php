@@ -3,6 +3,7 @@
 require_once 'Repository.php';
 require_once __DIR__.'/../data/Event.php';
 require_once __DIR__.'/../data/EventCreateDTO.php';
+require_once __DIR__.'/../data/EventJoinDTO.php';
 
 class EventRepository extends Repository {
   public function addEvent(EventCreateDTO $event): int {
@@ -27,9 +28,9 @@ class EventRepository extends Repository {
   public function getEvents(): array {
     $conn = $this->database->getConnection();
     $sql = "SELECT id, title, description, event_date, creator_first_name, creator_surname, users 
-            FROM events_with_users";
-            // WHERE EXTRACT(MONTH FROM event_date) = EXTRACT(MONTH FROM NOW())
-            // AND EXTRACT(YEAR FROM event_date) = EXTRACT(YEAR FROM NOW())";
+            FROM events_with_users
+            WHERE EXTRACT(MONTH FROM event_date) = EXTRACT(MONTH FROM NOW())
+            AND EXTRACT(YEAR FROM event_date) = EXTRACT(YEAR FROM NOW())";
     $stmt = $conn->prepare($sql);
     
     $stmt->execute();
@@ -52,5 +53,18 @@ class EventRepository extends Repository {
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     return array_map(fn($row) => Event::fromDbRow($row), $rows);
+  }
+
+  public function joinEvent(EventJoinDTO $data) {
+    $conn = $this->database->getConnection();
+    $sql = "CALL join_user_to_event(:user_id, :event_id)";
+    $stmt = $conn->prepare($sql);
+
+    $stmt->execute([
+      'user_id' => $data->user_id,
+      'event_id' => $data->event_id
+    ]);
+
+    $stmt->closeCursor();
   }
 }

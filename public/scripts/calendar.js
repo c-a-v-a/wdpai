@@ -24,15 +24,6 @@ async function getEvents() {
     
     events[day] ??= [];
     events[day].push(event);
-    events[day].push(event);
-    events[day].push(event);
-    events[day].push(event);
-    events[day].push(event);
-    events[day].push(event);
-    events[day].push(event);
-    events[day].push(event);
-    events[day].push(event);
-    events[day].push(event);
   }
 
   console.log(events)
@@ -103,7 +94,10 @@ function renderCalendar() {
     dayCell.insertBefore(document.createTextNode(day), dayCell.firstChild);
 
     if (events[day]) {
-      dayCell.querySelector('.event-dot').classList.add('event-dot-visible');
+      const hasJoined = events[day].some(e => e.joined);
+      const gridDot = dayCell.querySelector('.event-dot');
+      gridDot.classList.add('event-dot-visible');
+      if (!hasJoined) gridDot.classList.add('event-dot-unjoined');
       dayCell.style.cursor = 'pointer';
       dayCell.onclick = () => openEventsModal(day);
     }
@@ -127,13 +121,30 @@ function renderCalendar() {
     listName.textContent = DAYS[adjustedDayOfWeek];
 
     if (events[day]) {
-      listItem.querySelector('.event-dot').classList.add('event-dot-visible');
+      const hasJoined = events[day].some(e => e.joined);
+      const listDot = listItem.querySelector('.event-dot');
+      listDot.classList.add('event-dot-visible');
+      if (!hasJoined) listDot.classList.add('event-dot-unjoined');
       listItem.style.cursor = 'pointer';
       listItem.onclick = () => openEventsModal(day);
     }
 
     list.appendChild(listClone);
   }
+}
+
+async function joinEvent(id, day) {
+  const res = await fetch(`/api/event/join?event_id=${id}`, { method: 'POST' });
+
+  if (!res.ok) {
+    alert("Could not join event");
+    return;
+  }
+
+  events = {};
+  await getEvents();
+  renderCalendar();
+  openEventsModal(day);
 }
 
 function openEventsModal(day) {
@@ -157,7 +168,9 @@ function openEventsModal(day) {
     clone.querySelector('.event-item-users').textContent = names.length ? names.join(', ') : 'No participants';
 
     if (!event.joined) {
-      clone.querySelector('.event-item-join').classList.add('event-item-join-visible');
+      const joinBtn = clone.querySelector('.event-item-join');
+      joinBtn.classList.add('event-item-join-visible');
+      joinBtn.onclick = () => joinEvent(event.id, day);
     }
 
     list.appendChild(clone);
