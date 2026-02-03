@@ -24,8 +24,9 @@ class MessageRepository extends Repository {
   public function getMessages(): array {
     $conn = $this->database->getConnection();
     $sql = "SELECT id, title, content, created_at, author_first_name, author_surname, comments 
-            FROM messages_with_author_and_comments";
-            // WHERE created_at >= NOW() - INTERVAL '3 days'";
+            FROM messages_with_author_and_comments
+            WHERE created_at >= NOW() - INTERVAL '3 days'
+            ORDER BY created_at DESC";
     $stmt = $conn->prepare($sql);
     
     $stmt->execute();

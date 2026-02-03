@@ -33,6 +33,10 @@ function renderTemplates(messages) {
       commentsElement.appendChild(commentElement);
     }
 
+    const commentInput = clone.querySelector('.comment-input');
+    const commentButton = clone.querySelector('.add-comment-container .btn');
+    commentButton.onclick = () => addComment(message.id, commentInput);
+
     container.appendChild(clone);
   }
 }
@@ -48,4 +52,61 @@ document.getElementById('add-message').onclick = () => {
 
 document.getElementById('cancel-action').onclick = () => {
   document.getElementById('modal-overlay').classList.remove('modal-overlay-visible');
+}
+
+async function addMessage() {
+  const form = document.querySelector('#modal-overlay .form');
+
+  if (!form.checkValidity()) {
+    return;
+  }
+
+  const title = document.getElementById('title-input').value;
+  const content = document.getElementById('content-input').value;
+
+  const res = await fetch('/api/message', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      title,
+      content
+    })
+  });
+
+  if (!res.ok) {
+    alert("Could not add message");
+  }
+
+  document.getElementById('modal-overlay').classList.remove('modal-overlay-visible');
+
+  renderTemplates(await getMessages());
+}
+
+document.getElementById('add-message-action').onclick = addMessage;
+
+async function addComment(messageId, inputElement) {
+  const content = inputElement.value;
+
+  if (!content) {
+    return;
+  }
+
+  const res = await fetch('/api/comment', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      message_id: messageId,
+      content
+    })
+  });
+
+  if (!res.ok) {
+    alert("Could not add comment");
+  }
+
+  renderTemplates(await getMessages());
 }
