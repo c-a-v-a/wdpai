@@ -24,8 +24,14 @@ class UserApiController extends ApiController {
       throw new RuntimeException("Email or password incorrect.");
     }
 
+    if ($user->active === false) {
+      http_response_code(403);
+      return;
+    }
+
     $_SESSION['id'] = $user->id;
     $_SESSION['email'] = $user->email;
+    $_SESSION['admin'] = $user->admin;
 
     echo json_encode(['success' => true]);
   }

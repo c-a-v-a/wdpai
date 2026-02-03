@@ -4,6 +4,7 @@ require_once 'Repository.php';
 require_once __DIR__.'/../data/User.php';
 require_once __DIR__.'/../data/UserCreateDTO.php';
 require_once __DIR__.'/../data/UserLoginDTO.php';
+require_once __DIR__.'/../data/UserLoggedInDTO.php';
 
 class UserRepository extends Repository {
   public function addUser(UserCreateDTO $user): int {
@@ -37,11 +38,11 @@ class UserRepository extends Repository {
 
   public function getUser(string $email): object {
     $conn = $this->database->getConnection();
-    $sql = "SELECT id, email, password FROM users WHERE email = :email";
+    $sql = "SELECT id, email, password, admin, active FROM users WHERE email = :email";
     $stmt = $conn->prepare($sql);
     
     $stmt->execute([ 'email' => $email ]);
-    $stmt->setFetchMode(PDO::FETCH_CLASS, UserLoginDTO::class);
+    $stmt->setFetchMode(PDO::FETCH_CLASS, UserLoggedInDTO::class);
 
     return $stmt->fetch();
   }

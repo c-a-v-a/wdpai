@@ -11,6 +11,7 @@ require_once 'controllers/api/MessageApiController.php';
 require_once 'controllers/api/UserApiController.php';
 require_once 'middleware/checkRequestAllowed.php';
 require_once 'middleware/checkIsAuthorized.php';
+require_once 'middleware/checkAdminPermissions.php';
 
 class Router {
   public static $routes = [
@@ -91,6 +92,8 @@ class Router {
         http_response_code(405);
       } else if (!checkIsAuthorized($controllerObj, $action)) {
         http_response_code(401);
+      } else if (!checkAdminPermissions($controllerObj, $action)) {
+        http_response_code(403);
       } else {
         $controllerObj->$action(Router::parse($query));
       }
