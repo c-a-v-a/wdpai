@@ -12,10 +12,10 @@ class Database {
   private int $port;
 
   private function __construct() {
-    $this->username = "docker";
-    $this->password = "docker";
+    $this->username = getenv('DB_USER');
+    $this->password = getenv('DB_PASSWORD');
     $this->host = "db";
-    $this->database = "FamBoard";
+    $this->database = getenv('DB_NAME');
     $this->port = 5432;
   }
 

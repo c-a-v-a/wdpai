@@ -78,7 +78,6 @@ function renderWeekCalendar() {
   grid.innerHTML = '';
   list.innerHTML = '';
 
-  // Add day labels to grid
   for (const dayName of DAYS) {
     const label = document.createElement('div');
     label.classList.add('week-day-label');
@@ -93,7 +92,6 @@ function renderWeekCalendar() {
     const isTodayDate = isToday(date);
     const isWeekendDay = isWeekend(adjustedDayOfWeek);
 
-    // Grid view
     const dayClone = dayTemplate.content.cloneNode(true);
     const dayCell = dayClone.querySelector('.week-day');
 
@@ -111,7 +109,6 @@ function renderWeekCalendar() {
 
     grid.appendChild(dayClone);
 
-    // List view
     const listClone = listTemplate.content.cloneNode(true);
     const listItem = listClone.querySelector('.week-list-item');
     const listDay = listClone.querySelector('.week-list-day');
