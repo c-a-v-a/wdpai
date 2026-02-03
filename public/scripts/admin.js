@@ -86,7 +86,11 @@ async function addUser() {
   document.getElementById('modal-overlay').classList.remove('modal-overlay-visible');
 
   if (!res.ok) {
-    alert("Could not add user");
+    if (res.status === 409) {
+      alert("User with this email already exists");
+    } else {
+      alert("Could not add user");
+    }
   }
 
   renderTemplates(await getUsers());

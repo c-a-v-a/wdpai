@@ -104,7 +104,13 @@ class UserApiController extends ApiController {
     $dto->surname = (string)$data['surname'];
     $dto->email = (string)$data['email'];
     $dto->password = (string)$data['password'];
-    $id = UserRepository::getInstance()->addUser($dto);
+
+    try {
+      $id = UserRepository::getInstance()->addUser($dto);
+    } catch (Exception $e) {
+      http_response_code(409);
+      return;
+    }
 
     header('Content-Type: application/json');
     echo json_encode(['success' => true, 'id' => $id]);

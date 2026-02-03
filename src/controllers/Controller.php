@@ -4,6 +4,11 @@ class Controller {
   protected static ?self $instance = null;
 
   private function __construct() {
+    session_set_cookie_params([
+      'httponly' => true,
+      'secure' => true,
+      'samesite' => 'Strict'
+    ]);
     session_start();
   }
 
