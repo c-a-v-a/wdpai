@@ -9,7 +9,7 @@ class CommentApiController extends ApiController {
   public function addComment() {
     $data = $this->getJson();
 
-    foreach (['user_id', 'message_id', 'content'] as $field) {
+    foreach (['message_id', 'content'] as $field) {
       if (!isset($data[$field])) {
         http_response_code(400);
         throw new RuntimeException("Missing field $field");
@@ -17,7 +17,7 @@ class CommentApiController extends ApiController {
     }
 
     $dto = new CommentCreateDTO();
-    $dto->user_id = (int)$data['user_id'];
+    $dto->user_id = $_SESSION['id'];
     $dto->message_id = (int)$data['message_id'];
     $dto->content = (string)$data['content'];
     $id = CommentRepository::getInstance()->addComment($dto);

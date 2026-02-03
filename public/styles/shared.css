@@ -124,6 +124,11 @@ a {
 
 .form-field {
   margin-bottom: var(--space-sm);
+  width: 100%;
+}
+
+.form-field>* {
+  width: 100%;
 }
 
 .app {
@@ -218,6 +223,8 @@ a {
   border-radius: calc(var(--border-radius) * 1.5);
   width: 100%;
   max-width: 480px;
+  max-height: 80vh;
+  overflow-y: auto;
   padding: var(--space-lg);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   display: flex;

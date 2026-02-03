@@ -17,7 +17,7 @@ class EventApiController extends ApiController {
   private function addEvent() {
     $data = $this->getJson();
 
-    foreach (['created_by', 'title', 'description', 'event_date'] as $field) {
+    foreach (['title', 'description', 'event_date'] as $field) {
       if (!isset($data[$field])) {
         http_response_code(400);
         throw new RuntimeException("Missing field $field");
@@ -25,7 +25,7 @@ class EventApiController extends ApiController {
     }
 
     $dto = new EventCreateDTO();
-    $dto->created_by = (int)$data['created_by'];
+    $dto->created_by = $_SESSION['id'];
     $dto->title = (string)$data['title'];
     $dto->description = (string)$data['description'];
     $dto->event_date = (string)$data['event_date'];

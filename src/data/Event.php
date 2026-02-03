@@ -15,7 +15,7 @@ class Event implements JsonSerializable {
     $joined = false;
 
     foreach ($this->users as $user) {
-      if ($user['id'] === $_SESSION['id']) {
+      if ($user->id === $_SESSION['id']) {
         $joined = true;
         break;
       }

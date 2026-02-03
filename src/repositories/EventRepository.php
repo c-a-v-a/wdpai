@@ -27,9 +27,9 @@ class EventRepository extends Repository {
   public function getEvents(): array {
     $conn = $this->database->getConnection();
     $sql = "SELECT id, title, description, event_date, creator_first_name, creator_surname, users 
-            FROM events_with_users
-            WHERE EXTRACT(MONTH FROM event_date) = EXTRACT(MONTH FROM NOW())
-            AND EXTRACT(YEAR FROM event_date) = EXTRACT(YEAR FROM NOW())";
+            FROM events_with_users";
+            // WHERE EXTRACT(MONTH FROM event_date) = EXTRACT(MONTH FROM NOW())
+            // AND EXTRACT(YEAR FROM event_date) = EXTRACT(YEAR FROM NOW())";
     $stmt = $conn->prepare($sql);
     
     $stmt->execute();

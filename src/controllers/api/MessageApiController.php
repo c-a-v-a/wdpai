@@ -17,7 +17,7 @@ class MessageApiController extends ApiController {
   private function addMessage() {
     $data = $this->getJson();
 
-    foreach (['user_id', 'title', 'content'] as $field) {
+    foreach (['title', 'content'] as $field) {
       if (!isset($data[$field])) {
         http_response_code(400);
         throw new RuntimeException("Missing field $field");
@@ -25,7 +25,7 @@ class MessageApiController extends ApiController {
     }
 
     $dto = new MessageCreateDTO();
-    $dto->user_id = (int)$data['user_id'];
+    $dto->user_id = $_SESSION['id'];
     $dto->title = (string)$data['title'];
     $dto->content = (string)$data['content'];
     $id = MessageRepository::getInstance()->addMessage($dto);
