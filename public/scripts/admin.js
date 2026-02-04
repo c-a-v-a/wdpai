@@ -83,6 +83,7 @@ async function addUser() {
     })
   });
 
+  form.reset();
   document.getElementById('modal-overlay').classList.remove('modal-overlay-visible');
 
   if (!res.ok) {

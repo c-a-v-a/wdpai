@@ -229,6 +229,7 @@ async function addEvent() {
   await getEvents()
   renderCalendar();
 
+  form.reset();
   document.getElementById('add-event-modal').classList.remove('modal-overlay-visible');
 }
 

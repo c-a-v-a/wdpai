@@ -79,6 +79,7 @@ async function addMessage() {
     alert("Could not add message");
   }
 
+  form.reset();
   document.getElementById('modal-overlay').classList.remove('modal-overlay-visible');
 
   renderTemplates(await getMessages());
@@ -92,6 +93,8 @@ async function addComment(messageId, inputElement) {
   if (!content) {
     return;
   }
+
+  inputElement.value = '';
 
   const res = await fetch('/api/comment', {
     method: 'POST',
