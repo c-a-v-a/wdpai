@@ -4,6 +4,8 @@ FamBoard to internetowa tablica ogłoszeń dla osób mieszkających pod jednym d
 Celem aplikacji jest ułatwienie komunikacji i planowania dla rodzin i współokatorów, którzy
 poprzez różne harmonogramy mogą mieć problemy w przekazywaniu informacji.
 
+Autor: Filip Cebula
+
 ## Funkcjonalność
 
 Aplikacja umożliwia:
