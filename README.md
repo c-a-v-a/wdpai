@@ -89,6 +89,16 @@ DB_USER=docker
 DB_PASSWORD=docker
 ```
 
+Jeżeli korzystasz z przykładowej bazy danych stworzonej do testowania aplikacji poniżej znajdziesz email i haslo do przykładowych kont:
+
+**Admin**
+test@test.com
+testtest123
+
+**Zwykły użytkownik**
+enabled@user.com
+123123123
+
 ## ✅ Checklist
 
 - [X] Dokumentacja w `README.md`
